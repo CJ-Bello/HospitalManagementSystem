@@ -10,14 +10,21 @@ namespace WPF.Hospital.Repository
 {
     public class PatientRepository : IPatientRepository
     {
+        private readonly HospitalDbContext _context;
+        public PatientRepository(HospitalDbContext context)
+        {
+            _context = context;
+        }
         public void Add(Patient entity)
         {
-            throw new NotImplementedException();
+            _context.Patients.Add(entity);
+            _context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _context.Patients.Remove();
+            _context.SaveChanges();
         }
 
         public Patient? Get(int id)
@@ -32,7 +39,8 @@ namespace WPF.Hospital.Repository
 
         public int Save()
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
+
         }
 
         public void Update(Patient entity)
